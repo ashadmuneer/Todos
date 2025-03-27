@@ -20,13 +20,11 @@ A simple and responsive task management application built with React, allowing u
 ![App Screenshot](https://i.imgur.com/iaGiMYd.png)  
 
 ## 📦 Installation & Setup  
-
-### Clone the repository  
 ```sh
-git clone https://github.com/your-username/task-manager.git
-cd task-manager
+git clone https://github.com/ashadmuneer/Task-Management-App.git
+cd Task-Management-App
 npm install
-npm start
+npm run dev
 The app will be available at http://http://localhost:5173
 ```
 ## 🚢 Deployment  
@@ -46,7 +44,6 @@ src/
 ```
 
 ## 📖 Usage  
-
 - **Add a Task** – Click the **"Add Task"** button, enter details, and save.  
 - **Edit a Task** – Click the ✏️ edit icon next to a task, modify details, and update.  
 - **Delete a Task** – Click the 🗑️ delete icon to remove a task.  
