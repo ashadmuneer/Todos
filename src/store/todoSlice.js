@@ -38,23 +38,30 @@ const todoSlice = createSlice({
                 saveToLocalStorage(state.todos);
             }
         },
+        editTodo: (state, action) => {
+            const { id, newText } = action.payload;
+            const todo = state.todos.find((t) => t.id === id);
+            if (todo) {
+                todo.text = newText;
+                saveToLocalStorage(state.todos);
+            }
+        },
         setFilter: (state, action) => {
             state.filter = action.payload;
         },
         setSortBy: (state, action) => {
             state.sortBy = action.payload;
-        
+
             if (action.payload === "priority") {
-                const priorityOrder = { "High": 1, "Medium": 2, "Low": 3 };
-        
+                const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+
                 state.todos = state.todos.slice().sort((a, b) => {
                     return priorityOrder[a.priority.trim()] - priorityOrder[b.priority.trim()];
                 });
             } else if (action.payload === "date") {
                 state.todos = state.todos.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
             }
-        
-            console.log("Sorted Todos:", state.todos);
+
             saveToLocalStorage(state.todos);
         },
         reorderTodos: (state, action) => {
@@ -62,9 +69,9 @@ const todoSlice = createSlice({
             const movedItem = state.todos.splice(sourceIndex, 1)[0];
             state.todos.splice(destinationIndex, 0, movedItem);
             saveToLocalStorage(state.todos);
-        }
+        },
     },
 });
 
-export const { addTodo, removeTodo, toggleTodo, setFilter, setSortBy, reorderTodos } = todoSlice.actions;
+export const { addTodo, removeTodo, toggleTodo, editTodo, setFilter, setSortBy, reorderTodos } = todoSlice.actions;
 export default todoSlice.reducer;

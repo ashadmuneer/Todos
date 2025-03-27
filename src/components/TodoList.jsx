@@ -6,7 +6,7 @@ import TodoForm from "./TodoForm";
 import { Box, Typography, createTheme, ThemeProvider, MenuItem, Select } from "@mui/material";
 import FilterBtn from "./FilterBtn";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { addTodo, removeTodo, toggleTodo, setFilter, setSortBy, reorderTodos } from "../store/todoSlice"
+import { addTodo, removeTodo, toggleTodo, setFilter, setSortBy, reorderTodos, editTodo } from "../store/todoSlice";
 
 const theme = createTheme({
     typography: {
@@ -87,7 +87,12 @@ export default function TodoList() {
                                         <Draggable key={todo.id} draggableId={todo.id} index={index}>
                                             {(provided) => (
                                                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                                                    <TodoItem todo={todo} remove={() => dispatch(removeTodo(todo.id))} toggle={() => dispatch(toggleTodo(todo.id))} />
+                                                    <TodoItem 
+                                                        todo={todo} 
+                                                        remove={() => dispatch(removeTodo(todo.id))} 
+                                                        toggle={() => dispatch(toggleTodo(todo.id))} 
+                                                        editTodo={(id, newText) => dispatch(editTodo({ id, newText }))}
+                                                    />
                                                 </div>
                                             )}
                                         </Draggable>
